@@ -10,8 +10,8 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "./external/baseinterface/baseinterface.go",
-            "args": ["-f","${workspaceFolder}/bin/etc/external/baseinterface.yaml"],
+            "program": "./external_api/baseinterface/baseinterface.go",
+            "args": ["-f","${workspaceFolder}/bin/etc/external_api/baseinterface.yaml"],
             "env":{}
         }
     ]

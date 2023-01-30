@@ -1,6 +1,10 @@
 # SimpleTikTok_MSA
 go-zero从单体向微服务改进的尝试
 
+## 0. 获取帮助
+```shell
+useage: ./GoZeroUse 
+```
 
 ## 1. goctl生成
 什么都不填，两个都会生成
@@ -12,10 +16,10 @@ useage: ./GoZeroUse create api
 ### 2. 编译
 现在编译会输出参数
 ```shell
-useage: ./GoZeroUse create api
-        ./GoZeroUse create proto
-        ./GoZeroUse create proto -a # 重新编译
-        ./GoZeroUse create  # 全部编译
+useage: ./GoZeroUse build api
+        ./GoZeroUse build proto
+        ./GoZeroUse build proto -a # 重新编译
+        ./GoZeroUse build  # 全部编译
 ```
 ### 3. 启动
 发现运行失败，尝试使用ps查看进程是否已经启动了

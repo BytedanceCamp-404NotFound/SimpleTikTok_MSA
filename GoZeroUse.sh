@@ -3,13 +3,12 @@
 OutType=$1
 ROOT=$PWD
 BIN_FOLDER=$ROOT/bin
-API_OUTPUT=$ROOT/bin/external
-PROTO_OUTPUT=$ROOT/bin/internal
+API_OUTPUT=$ROOT/bin/external_api
+PROTO_OUTPUT=$ROOT/bin/internal_proto
 ETC_OUTPUT=$ROOT/bin/etc
-etc_output_api=$ETC_OUTPUT/external
-etc_output_proto=$ETC_OUTPUT/internal
+etc_output_api=$ETC_OUTPUT/external_api
+etc_output_proto=$ETC_OUTPUT/internal_proto
 LOG_FOLDER=$ROOT/bin/logs/
-
 
 if [ ! -d $BIN_FOLDER ]; then
     mkdir -p $API_OUTPUT
@@ -19,15 +18,27 @@ if [ ! -d $BIN_FOLDER ]; then
     mkdir -p $LOG_FOLDER
 fi
 
+
+
+if [[ $OutType == "" ]];then 
+    echo "useage:   ./GoZeroUse [creat,build,run,kill,clear] [api,proto,all] [-c] [base,com,rela]"
+    echo "example1: ./GoZeroUse create api"
+    echo "example2: ./GoZeroUse build proto"
+    echo "example3: ./GoZeroUse build proto -a"
+    echo "example4: ./GoZeroUse run api -c base"
+    echo "example5: ./GoZeroUse kill all"
+    echo "example6: ./GoZeroUse clear"
+fi
+
 create_api(){
-    cd external
+    cd external_api
     goctl api go -api api/baseinterface.api -dir baseinterface/ -style gozero
     goctl api go -api api/commaction.api -dir commaction/ -style gozero
     goctl api go -api api/relationfollow.api -dir relationfollow/ -style gozero
     cd -
 }
 create_proto(){
-    cd internal
+    cd internal_proto
     goctl_cmd1="goctl rpc protoc "
     for f in $(find . -name "*.proto" -exec basename {} \;)
     do
@@ -49,11 +60,13 @@ if [[ $OutType == "create" ]];then
     "proto") 
         create_proto
     ;;
-    *) 
+    "all")
         create_api 
         create_proto
-        echo "useage: ./GoZeroUse create api"
-        echo "        ./GoZeroUse create proto"
+    ;;
+    *) 
+        echo "useage:   ./GoZeroUse create [api,proto,all]"
+        echo "example1: ./GoZeroUse create proto"
     ;;
     esac
 fi
@@ -71,7 +84,7 @@ build_api(){
     if [ ! -d $etc_output_api ]; then
         mkdir -p $etc_output_api
     fi
-    cd external
+    cd external_api
     go build -o $API_OUTPUT -v -p 2 $is_build baseinterface/baseinterface.go  
     go build -o $API_OUTPUT -v -p 2 $is_build commaction/commactioninterface.go  
     go build -o $API_OUTPUT -v -p 2 $is_build relationfollow/relationfollowinterface.go  
@@ -88,7 +101,7 @@ build_proto(){
     if [ ! -d $etc_output_proto ]; then
         mkdir -p $etc_output_proto
     fi
-    cd internal/microservices
+    cd internal_proto/microservices
     goctl_cmd1="go build -o $PROTO_OUTPUT -v -p 2 $is_build "
     for f in $(find . -name "*.go" -maxdepth 2)
     do 
@@ -108,20 +121,22 @@ build_proto(){
 if [[ $OutType == "build" ]];then
     case $2 in
     "api") 
-        build_api
+        build_api $3
     ;;
     "proto") 
-        build_proto
+        build_proto $3
     ;;
-    *) 
+    "all") 
         build_api 
         build_proto
-        echo "useage: ./GoZeroUse build api"
-        echo "        ./GoZeroUse build api -a"
+    ;;
+    *)
+        echo "useage:   ./GoZeroUse build [api,proto,all] [可选][-a]"
+        echo "example1: ./GoZeroUse build api"
+        echo "example2: ./GoZeroUse build proto -a # 重新构建"
     ;;
     esac
 fi
-
 
 
 run_logs_create(){
@@ -145,15 +160,17 @@ run_api(){
             ./baseinterface -f $etc_output_api/baseinterface.yaml > $LOG_FOLDER$filename 2>&1 
         ;;
         "com")
-            ./commactioninterface -f $etc_output_api/commactioninterface.yaml
+            filename="$(date +%Y%m%d)_$(date +%H%M%S)_commactioninterface.log"
+            ./commactioninterface -f $etc_output_api/commactioninterface.yaml > $LOG_FOLDER$filename 2>&1
         ;;
         "rela")
             ./relationfollowinterface -f $etc_output_api/relationfollowinterface.yaml
         ;;
         *)
-            echo "useage: ./GoZeroUse run api -c"
-            echo "        ./GoZeroUse run api -c [base,com,rela]"
-            echo "        ./GoZeroUse run api # 全部运行"
+            echo "==================使用-c 不需要crtl+z================"
+            echo "useage:   ./GoZeroUse run api -c [base,com,rela]"
+            echo "example1: ./GoZeroUse run api -c base"
+            echo "example2: ./GoZeroUse run api # 全部运行"
         esac
     else
         for f in $(find .  -type f -exec basename {} \;)
@@ -200,15 +217,13 @@ if [[ $OutType == "run" ]];then
         run_proto
     ;;
     *)
-        echo "useage: ./GoZeroUse run  "
-        echo "        ./GoZeroUse run all"
-        echo "        ./GoZeroUse run api "
-        echo "        ./GoZeroUse run api -c base"
+        echo "useage:   ./GoZeroUse run [api,proto,all] [-c] [base,com,rela]"
+        echo "example1: ./GoZeroUse run api "
+        echo "example2: ./GoZeroUse run api -c base"
+        echo "example3: ./GoZeroUse run proto # 暂时不支持选择，需要自己添加"
     ;;
     esac
 fi
-
-
 
 # pid=$(ps -ef | grep "./baseinterface" | grep -v grep | awk '{print $2}')
 # kill -f $pid
@@ -255,9 +270,9 @@ if [[ $OutType == "kill" ]];then
         ps -f
     ;;
     *)
-        echo "useage: ./GoZeroUse kill "
-        echo "        ./GoZeroUse kill api"
-        echo "        ./GoZeroUse kill all"
+        echo "useage:   ./GoZeroUse kill [api,proto,etcd,all]"
+        echo "example1: ./GoZeroUse kill api"
+        echo "example2: ./GoZeroUse kill all"
     ;;
     esac
 fi
@@ -267,5 +282,6 @@ fi
 if [[ $OutType == "clear" ]];then 
     rm -rf $LOG_FOLDER/*
 fi
+
 
 
