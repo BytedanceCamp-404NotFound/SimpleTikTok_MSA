@@ -1,0 +1,31 @@
+MySQL:
+ UserName: root
+ PassWord: 119149349j  
+ Host: 175.178.93.55
+ Port: 3306
+ DBname: SimpleTikTok
+ TimeOut: 10s
+#  MaxIdleConns: 200
+#  MaxOpenConns: 200
+#  ConnMaxLifetime: 5
+
+
+Minio:
+ Endpoint: 175.178.93.55:9001 # 用的API端口，不是Console
+ AccessKeyID: minio
+ SecretAccessKey: minio123
+ UseSSL: false
+
+
+MongoDB:
+ mongoUserName: admin
+ mongoPwd: admin
+ mongoUrl: 192.168.31.132
+ mongoPort: 27017
+ mongoDatabase: "tiktok"
+ mongoTable: "comment"
+
+gormpool:
+ MaxIdleConns: 25
+ MaxOpenConns: 25
+ ConnMaxLifetime: 5

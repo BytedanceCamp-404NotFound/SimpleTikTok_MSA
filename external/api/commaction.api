@@ -1,0 +1,81 @@
+import (
+	"commondatastructure.api"  // 公用的数据结构
+)
+// 互动方向
+// 赞操作
+type FavoriteActionHandlerRequest {
+	Token      string `form:"token"`
+	VideoId    int64  `form:"video_id"`
+	ActionType int32  `form:"action_type"`
+}
+
+type FavoriteActionHandlerResponse {
+	StatusCode int32  `form:"status_code"`
+	StatusMsg  string `form:"status_msg"`
+}
+
+// 喜欢列表
+type FavoriteListRegisterHandlerRequest {
+	UserID int64  `form:"user_id"`
+	Token  string `form:"token"`
+}
+
+type FavoriteListRegisterHandlerResponse {
+	StatusCode int32   `form:"status_code"`
+	StatusMsg  string  `form:"status_msg"`
+	VideoList  []Video `form:"video_list"`
+}
+
+// 评论操作
+type Comment {
+	Id         int64  `json:"id"          form:"_id"         bson:"_id"`
+	VideoId    int64  `json:"video_id"    form:"video_id"    bson:"video_id"` //视频id
+	User       User   `json:"user"        form:"user"        bson:"user"`
+	Content    string `json:"content"     form:"content"     bson:"content"`
+	CreateDate string `json:"create_date" form:"create_date" bson:"create_date"`
+}
+type CommmentActionHandlerRequest {
+	Token       string `form:"token"`
+	VideoId     int64  `form:"video_id"`
+	ActionType  int32  `form:"action_type"`
+	CommentText string `form:"comment_text,optional"`
+	CommentId   int64  `form:"comment_id,optional"`
+}
+
+type CommmentActionHandlerResponse {
+	StatusCode int32   `json:"status_code"`
+	StatusMsg  string  `json:"status_msg"`
+	Comment    Comment `json:"comment"`
+}
+
+// 视频评论列表
+type CommmentListHandlerRequest {
+	Token   string `form:"token"`
+	VideoId int64  `form:"video_id"`
+}
+
+type CommmentListHandlerResponse {
+	StatusCode  int32     `json:"status_code"`
+	StatusMsg   string    `json:"status_msg"`
+	CommentList []Comment `json:"comment_list"`
+}
+
+@server(
+	group: CommActionInterface
+)
+
+service CommActionInterface {
+	//互动接口
+	// 赞接口
+	@handler FavoriteActionHandler
+	post /douyin/favorite/action(FavoriteActionHandlerRequest) returns (FavoriteActionHandlerResponse)
+	// 喜欢列表
+	@handler FavoriteListRegisterHandler
+	get /douyin/favorite/list(FavoriteListRegisterHandlerRequest) returns (FavoriteListRegisterHandlerResponse)
+	// 评论操作
+	@handler CommmentActionHandler
+	post /douyin/commment/action (CommmentActionHandlerRequest) returns (CommmentActionHandlerResponse)
+	// 视频评论列表
+	@handler CommmentListHandler
+	get /douyin/commment/list (CommmentListHandlerRequest) returns (CommmentListHandlerResponse)
+}

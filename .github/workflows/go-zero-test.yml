@@ -1,0 +1,37 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+# 可以用做CI/CD持续集成，可以测试代码的问题
+name: 404NotFound-SimpleTikTok
+# 触发 workflow 的事件,workflow就是叫这个名字
+# on:
+#   workflow_dispatch:  # 手动触发工作流程
+# #   schedule:  # 事件允许您在计划的时间触发工作流程。
+# #     # 代表国际标准时间4点0分，北京时间需要+8小时，代表北京时间中午12点运行
+# #     - cron: '0 16 * * *'
+#   push: # 当推送到指定分支的时候，触发构建流程
+#     branches:
+#       - 'main'
+on: [push, pull_request] # push事件或pull_request事件都可以触发 workflow
+jobs:
+#将工作流程中运行的所有作业组合在一起
+  # go-zero-first这个就是job_id
+  #定义名为 my-love-job 的作业。 子键将定义作业的属性 
+  go-zero-first:    # 键值 job_id 是一个字符串 
+    name: go-zero-first
+    runs-on: ubuntu-latest  # 选择要使用的镜像版本
+    # runs-on: ubuntu-20.04 # 这个也是可以的
+    steps: # 作业包含一系列任务，称为 steps
+      #使用checkout@v2这个action获取源码
+      # 使用action库  actions/checkout获取源码
+      - uses: actions/checkout@v2 # 要作为作业运行的可重用工作流程文件的位置和版本
+
+      - name: Set up Go   # 安装go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+    
+      - name: Build   # 构建go
+        run: |
+          ./GoZeroUse.sh build
+# go run greet.go -f etc/greet-api.yaml

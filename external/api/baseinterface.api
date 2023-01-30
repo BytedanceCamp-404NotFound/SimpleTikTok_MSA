@@ -1,0 +1,104 @@
+import (
+	"commondatastructure.api"  // 公用的数据结构
+)
+// 基础接口
+// 视频流接口
+type FeedHandlerRequest {
+	LastestTime int64  `form:"lastest_time"`
+	Token       string `form:"token"`
+}
+
+type FeedHandlerResponse {
+	StatusCode int32   `json:"status_code"`
+	StatusMsg  string  `json:"status_msg"`
+	VideoList  []Video `json:"video_list"`
+	NextTime   int64   `json:"next_time"` // 获取到的视频中，最早的投稿时间
+}
+
+// 用户信息请求与响应接口
+type UserHandlerRequest {
+	UserID int64  `form:"user_id"`
+	Token  string `form:"token"`
+}
+
+type UserHandlerResponse {
+	StatusCode int32  `json:"status_code"`
+	StatusMsg  string `json:"status_msg"`
+	User       User   `json:"user"`
+}
+
+// 用户注册接口
+type UserRegisterHandlerRequest {
+	UserName string `form:"username"`
+	PassWord string `form:"password"`
+}
+
+type UserRegisterHandlerResponse {
+	StatusCode int32  `json:"status_code"`
+	StatusMsg  string `json:"status_msg"`
+	Token      string `json:"token"`
+	UserID     int64  `json:"user_id"`
+}
+
+// 用户登陆接口
+type UserloginHandlerRequest {
+	UserName string `form:"username"`
+	PassWord string `form:"password"`
+}
+
+type UserloginHandlerResponse {
+	StatusCode int32  `json:"status_code"`
+	StatusMsg  string `json:"status_msg"`
+	Token      string `json:"token"`
+	UserID     int64  `json:"user_id"`
+}
+
+// 视频投稿
+type PublishActionHandlerRequest {
+	Token string `form:"token"`
+	// Data  []byte `form:"data"` // 存放视频数据
+	Title string `form:"title"`
+}
+
+type PublishActionHandlerResponse {
+	StatusCode int32  `json:"status_code,default=400"`
+	StatusMsg  string `json:"status_msg,optional"`
+}
+
+// 发布列表
+type PublishListHandlerRequest {
+	UserID int64  `form:"user_id"`
+	Token  string `form:"token"`
+}
+
+type PublishListHandlerResponse {
+	StatusCode int32   `json:"status_code"`
+	StatusMsg  string  `json:"status_msg"`
+	VideoList  []Video `json:"video_list"`
+}
+
+@server(
+	group: BaseInterface
+)
+
+service BaseInterface {
+	// 基础接口
+	// 视频流接口
+	@handler FeedHandler
+	get /douyin/feed(FeedHandlerRequest) returns (FeedHandlerResponse)
+	// 用户登陆接口
+	@handler UserRegisterHandler
+	post /douyin/user/register(UserRegisterHandlerRequest) returns (UserRegisterHandlerResponse)
+	// 用户登录接口
+	@handler UserloginHandler
+	post /douyin/user/login(UserloginHandlerRequest) returns (UserloginHandlerResponse)
+	// 用户信息
+	@handler UserHandler
+	get /douyin/user(UserHandlerRequest) returns (UserHandlerResponse)
+	// 视频投稿
+	@handler PublishActionHandler
+	post /douyin/publish/action(PublishActionHandlerRequest) returns (PublishActionHandlerResponse)
+	// 发布列表
+	@handler PublishListHandler
+	get /douyin/publish/list(PublishListHandlerRequest) returns (PublishListHandlerResponse)
+}
