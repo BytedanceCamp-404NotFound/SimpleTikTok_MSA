@@ -3,43 +3,43 @@ go-zero从单体向微服务改进的尝试
 
 ## 0. 获取帮助
 ```shell
-useage: ./GoZeroUse 
+useage: ./GoZeroUse.sh 
 ```
 
 ## 1. goctl生成
 什么都不填，两个都会生成
 ```shell
-useage: ./GoZeroUse create api
-        ./GoZeroUse create proto
-        ./GoZeroUse create 
+useage: ./GoZeroUse.sh create api
+        ./GoZeroUse.sh create proto
+        ./GoZeroUse.sh create 
 ```
 ### 2. 编译
 现在编译会输出参数
 ```shell
-useage: ./GoZeroUse build api
-        ./GoZeroUse build proto
-        ./GoZeroUse build proto -a # 重新编译
-        ./GoZeroUse build  # 全部编译
+useage: ./GoZeroUse.sh build api
+        ./GoZeroUse.sh build proto
+        ./GoZeroUse.sh build proto -a # 重新编译
+        ./GoZeroUse.sh build  # 全部编译
 ```
 ### 3. 启动
 发现运行失败，尝试使用ps查看进程是否已经启动了
-如果有启动的进程，使用```./GoZeroUse.sh kill all```清除
+如果有启动的进程，使用```./GoZeroUse.sh.sh kill all```清除
 ```shell
-useage: ./GoZeroUse run api
-        ./GoZeroUse run proto
+useage: ./GoZeroUse.sh run api
+        ./GoZeroUse.sh run proto
 ```
 
 ### 4. 停止进程
 ```shell
-useage: ./GoZeroUse kill # 显示帮助信息，一定要填写参数
-        ./GoZeroUse kill api
-        ./GoZeroUse kill etcd
-        ./GoZeroUse kill all
+useage: ./GoZeroUse.sh kill # 显示帮助信息，一定要填写参数
+        ./GoZeroUse.sh kill api
+        ./GoZeroUse.sh kill etcd
+        ./GoZeroUse.sh kill all
 ```
 
 ### 5. 清理日志文件
 ```shell
-useage: ./GoZeroUse clear 
+useage: ./GoZeroUse.sh clear 
 ```
 
 # commit类型
