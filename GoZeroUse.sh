@@ -33,7 +33,7 @@ create_proto(){
     do
         ft=$(basename $f .proto)
         proto_file="proto/$f"
-        goctl_cmd2=" --go_out=MicroServices/$ft/pkg --go-grpc_out=MicroServices/$ft/pkg --zrpc_out=MicroServices/$ft"
+        goctl_cmd2=" --go_out=microservices/$ft/pkg --go-grpc_out=microservices/$ft/pkg --zrpc_out=microservices/$ft"
         cmd=$goctl_cmd1$proto_file$goctl_cmd2
         echo $cmd
         eval $cmd
@@ -88,16 +88,7 @@ build_proto(){
     if [ ! -d $etc_output_proto ]; then
         mkdir -p $etc_output_proto
     fi
-    cd internal/MicroServices
-    # goctl_cmd1="go build -o $PROTO_OUTPUT -v -p 2 $IS_REBUILD "
-    # for f in $(find . -name "*.go" -maxdepth 1 -exec basename {} \;)
-    # do
-    #     cmd=$goctl_cmd1$f
-    #     echo $cmd
-    #     eval $cmd
-    #     echo $f
-    # done
-    # cp -r etc $PROTO_OUTPUT
+    cd internal/microservices
     goctl_cmd1="go build -o $PROTO_OUTPUT -v -p 2 $is_build "
     for f in $(find . -name "*.go" -maxdepth 2)
     do 
@@ -200,11 +191,11 @@ if [[ $OutType == "run" ]];then
         run_api $3 $4
     ;;
     "proto" )
-        run_logs_create # 生成日志文件夹
+        run_logs_create 
         run_proto
     ;;
     "all")
-        run_logs_create # 生成日志文件夹
+        run_logs_create 
         run_api
         run_proto
     ;;

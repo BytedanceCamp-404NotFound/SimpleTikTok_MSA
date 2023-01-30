@@ -2,14 +2,14 @@
 go-zero从单体向微服务改进的尝试
 
 
-## goctl生成
+## 1. goctl生成
 什么都不填，两个都会生成
 ```shell
 useage: ./GoZeroUse create api
         ./GoZeroUse create proto
         ./GoZeroUse create 
 ```
-### 编译
+### 2. 编译
 现在编译会输出参数
 ```shell
 useage: ./GoZeroUse create api
@@ -17,7 +17,7 @@ useage: ./GoZeroUse create api
         ./GoZeroUse create proto -a # 重新编译
         ./GoZeroUse create  # 全部编译
 ```
-### 启动go-zero
+### 3. 启动
 发现运行失败，尝试使用ps查看进程是否已经启动了
 如果有启动的进程，使用```./GoZeroUse.sh kill all```清除
 ```shell
@@ -25,7 +25,7 @@ useage: ./GoZeroUse run api
         ./GoZeroUse run proto
 ```
 
-### 停止进程
+### 4. 停止进程
 ```shell
 useage: ./GoZeroUse kill # 显示帮助信息，一定要填写参数
         ./GoZeroUse kill api
@@ -33,7 +33,7 @@ useage: ./GoZeroUse kill # 显示帮助信息，一定要填写参数
         ./GoZeroUse kill all
 ```
 
-### 清理日志文件
+### 5. 清理日志文件
 ```shell
 useage: ./GoZeroUse clear 
 ```
