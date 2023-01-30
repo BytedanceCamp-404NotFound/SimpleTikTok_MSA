@@ -89,10 +89,29 @@ build_proto(){
         mkdir -p $etc_output_proto
     fi
     cd internal/MicroServices
-    go build -o $PROTO_OUTPUT -v -p 2 $is_build minio/minio.go  
-    go build -o $PROTO_OUTPUT -v -p 2 $is_build mysql/mysql.go  
-    cp minio/etc/* $etc_output_proto
-    cp mysql/etc/* $etc_output_proto
+    # goctl_cmd1="go build -o $PROTO_OUTPUT -v -p 2 $IS_REBUILD "
+    # for f in $(find . -name "*.go" -maxdepth 1 -exec basename {} \;)
+    # do
+    #     cmd=$goctl_cmd1$f
+    #     echo $cmd
+    #     eval $cmd
+    #     echo $f
+    # done
+    # cp -r etc $PROTO_OUTPUT
+    goctl_cmd1="go build -o $PROTO_OUTPUT -v -p 2 $is_build "
+    for f in $(find . -name "*.go" -maxdepth 2)
+    do 
+        cmd=$goctl_cmd1$f
+        eval $cmd
+        echo $cmd
+    done
+    # go build -o $PROTO_OUTPUT -v -p 2 ./utilserver/utilserver.go
+    for f in $(find . -name "*.yaml")
+    do 
+        cp $f $etc_output_proto
+        echo $f
+    done
+    # cp minio/etc/* $etc_output_proto
     cd -
 }
 if [[ $OutType == "build" ]];then
@@ -112,11 +131,19 @@ if [[ $OutType == "build" ]];then
     esac
 fi
 
+
+
+run_logs_create(){
+    datatime="$(date +%Y%m%d)_$(date +%H%M%S)/"
+    if [[ ! -d datatime ]];then
+        mkdir -p $LOG_FOLDER$datatime
+    fi
+    LOG_FOLDER=$LOG_FOLDER$datatime
+}
 # 需要使用go build生成的exe文件来执行，这样os.Executable()获取到的才是正确的路径
 # go run来运行，会将可执行文件默认放到/tmp/go-build...
 # 需要配置GOTMPDIR=""来改变go run生成可执行文件的位置
 # go run Baseinterface-Api.go -f etc/BaseInterface-Api.yaml
-
 run_api(){
     build_api
     cd $API_OUTPUT
@@ -153,10 +180,13 @@ run_api(){
 }
 run_proto(){
     build_proto
+    filename="$(date +%Y%m%d)_$(date +%H%M%S)_etcd.log"
+    etcd > $LOG_FOLDER$filename 2>&1 &
     cd $PROTO_OUTPUT
     for f in $(find .  -type f -exec basename {} \;)
     do
-        cmd="./$f -f $etc_output_proto/$f.yaml  &"
+        filename="$(date +%Y%m%d)_$(date +%H%M%S)_$f.log"
+        cmd="./$f -f $etc_output_proto/$f.yaml > $LOG_FOLDER$filename 2>&1  &"
         echo $cmd
         eval $cmd
     done
@@ -166,13 +196,15 @@ if [[ $OutType == "run" ]];then
     cp -r config bin  # 复制配置文件
     case $2 in
     "api" )
+        run_logs_create # 生成日志文件夹
         run_api $3 $4
     ;;
     "proto" )
-        etcd &
+        run_logs_create # 生成日志文件夹
         run_proto
     ;;
     "all")
+        run_logs_create # 生成日志文件夹
         run_api
         run_proto
     ;;
@@ -183,7 +215,6 @@ if [[ $OutType == "run" ]];then
         echo "        ./GoZeroUse run api -c base"
     ;;
     esac
-
 fi
 
 
@@ -238,6 +269,12 @@ if [[ $OutType == "kill" ]];then
         echo "        ./GoZeroUse kill all"
     ;;
     esac
+fi
+
+
+
+if [[ $OutType == "clear" ]];then 
+    rm -rf $LOG_FOLDER/*
 fi
 
 

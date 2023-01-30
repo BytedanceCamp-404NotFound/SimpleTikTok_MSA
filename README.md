@@ -18,6 +18,8 @@ useage: ./GoZeroUse create api
         ./GoZeroUse create  # 全部编译
 ```
 ### 启动go-zero
+发现运行失败，尝试使用ps查看进程是否已经启动了
+如果有启动的进程，使用```./GoZeroUse.sh kill all```清除
 ```shell
 useage: ./GoZeroUse run api
         ./GoZeroUse run proto
@@ -29,6 +31,11 @@ useage: ./GoZeroUse kill # 显示帮助信息，一定要填写参数
         ./GoZeroUse kill api
         ./GoZeroUse kill etcd
         ./GoZeroUse kill all
+```
+
+### 清理日志文件
+```shell
+useage: ./GoZeroUse clear 
 ```
 
 # commit类型
