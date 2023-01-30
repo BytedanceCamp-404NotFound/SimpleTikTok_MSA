@@ -8,4 +8,5 @@ import (
 type Config struct {
 	rest.RestConf
 	MinioManageRpc zrpc.RpcClientConf
+	MySQLManageRpc zrpc.RpcClientConf
 }

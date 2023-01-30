@@ -215,8 +215,8 @@ if [[ $OutType == "run" ]];then
     ;;
     "all")
         run_logs_create 
-        run_api
         run_proto
+        run_api  
     ;;
     *)
         echo "useage:   ./GoZeroUse run [api,proto,all] [-c] [base,com,rela]"
