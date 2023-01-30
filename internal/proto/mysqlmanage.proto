@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package MySQLManageServer;
+  
+// protoc-gen-go 版本大于1.4.0, proto文件需要加上go_package,否则无法生成
+option go_package = "./MySQLManageServer";
+
+message IdRequest {
+    string id = 1;
+}
+  
+message MySQLResponse {
+    // 用户id
+    string id = 1;
+    // 用户名称
+    string name = 2;
+    // 用户性别
+    string gender = 3;
+}
+  
+service MySQLManageServer {
+    rpc getMySQL(IdRequest) returns(MySQLResponse);
+}

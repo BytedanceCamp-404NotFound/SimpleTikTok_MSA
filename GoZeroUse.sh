@@ -33,7 +33,7 @@ create_proto(){
     do
         ft=$(basename $f .proto)
         proto_file="proto/$f"
-        goctl_cmd2=" --go_out=MicroServices/pkg --go-grpc_out=MicroServices/pkg --zrpc_out=MicroServices/$ft"
+        goctl_cmd2=" --go_out=MicroServices/$ft/pkg --go-grpc_out=MicroServices/$ft/pkg --zrpc_out=MicroServices/$ft"
         cmd=$goctl_cmd1$proto_file$goctl_cmd2
         echo $cmd
         eval $cmd

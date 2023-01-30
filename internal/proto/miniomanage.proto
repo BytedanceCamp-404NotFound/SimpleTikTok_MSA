@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package MinioManageServer;
+  
+// protoc-gen-go 版本大于1.4.0, proto文件需要加上go_package,否则无法生成
+option go_package = "./MinioManageServer";
+
+message PutFileUploaderRequest {
+    string bucketName = 1;
+    string objectPre = 2;
+    string filePath = 3;
+}
+  
+message PutFileUploaderResponse {
+    // 用户id
+    string id = 1;
+    // 用户名称
+    string name = 2;
+    // 用户性别
+    string gender = 3;
+}
+
+
+message PutFileUploaderByteRequest {
+    string bucketName = 1;
+    string objectPre = 2;
+    string filePath = 3;
+}
+  
+message PutFileUploaderByteponse {
+    // 用户id
+    string id = 1;
+    // 用户名称
+    string name = 2;
+    // 用户性别
+    string gender = 3;
+}
+
+message GetMinioConnectRequest {
+    // 用户id
+    string id = 1;
+    // 用户名称
+    string name = 2;
+    // 用户性别
+    string gender = 3;
+}
+
+message GetMinioConnectResponse {
+    string bucketName = 1;
+    string objectPre = 2;
+    string filePath = 3;
+}
+  
+service MinioManageServer {
+    // 文件上传
+    rpc PutFileUploader(PutFileUploaderRequest) returns(PutFileUploaderResponse);
+
+    // byte形式文件上传
+    rpc PutFileUploaderByte(PutFileUploaderByteRequest) returns(PutFileUploaderByteponse);
+
+    // 文件下载
+    rpc GetFileUploader(GetMinioConnectRequest) returns(GetMinioConnectResponse);
+}
