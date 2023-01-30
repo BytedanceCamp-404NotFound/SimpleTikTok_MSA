@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/config"
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/server"
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/miniomanage/pkg/MinioManageServer"
+	"SimpleTikTok/internal_proto/microservices/miniomanage/types/MinioManageServer"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

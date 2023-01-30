@@ -8,7 +8,7 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/utilserver/pkg/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
 )
 
 type UtilserverServer struct {

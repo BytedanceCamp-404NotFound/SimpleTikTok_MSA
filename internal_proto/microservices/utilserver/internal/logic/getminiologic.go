@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/utilserver/pkg/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

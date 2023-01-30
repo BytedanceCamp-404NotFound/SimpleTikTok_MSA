@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/config"
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/server"
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/pkg/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

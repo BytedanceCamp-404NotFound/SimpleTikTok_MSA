@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/config"
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/server"
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/utilserver/pkg/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/config"
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/server"
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/pkg/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

@@ -6,7 +6,7 @@ package miniomanageserverclient
 import (
 	"context"
 
-	"SimpleTikTok/internal_proto/microservices/miniomanage/pkg/MinioManageServer"
+	"SimpleTikTok/internal_proto/microservices/miniomanage/types/MinioManageServer"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

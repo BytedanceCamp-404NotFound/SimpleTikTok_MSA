@@ -8,7 +8,7 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/pkg/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
 )
 
 type MongodbManageServerServer struct {

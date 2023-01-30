@@ -6,7 +6,7 @@ package mysqlmanageserverclient
 import (
 	"context"
 
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/pkg/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

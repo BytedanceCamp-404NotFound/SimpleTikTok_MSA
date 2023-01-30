@@ -6,7 +6,7 @@ package mongodbmanageserverclient
 import (
 	"context"
 
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/pkg/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

@@ -1,3 +1,7 @@
 Name: BaseInterface
 Host: 0.0.0.0
 Port: 8888
+MinioManageRpc:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: miniomanage.rpc

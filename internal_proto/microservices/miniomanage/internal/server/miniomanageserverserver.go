@@ -8,7 +8,7 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/miniomanage/pkg/MinioManageServer"
+	"SimpleTikTok/internal_proto/microservices/miniomanage/types/MinioManageServer"
 )
 
 type MinioManageServerServer struct {

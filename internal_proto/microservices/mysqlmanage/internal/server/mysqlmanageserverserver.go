@@ -8,7 +8,7 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/pkg/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
 )
 
 type MySQLManageServerServer struct {
