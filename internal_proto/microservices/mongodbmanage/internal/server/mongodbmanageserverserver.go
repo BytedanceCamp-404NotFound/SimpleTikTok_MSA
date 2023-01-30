@@ -8,12 +8,12 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/mongodbmanageserver"
 )
 
 type MongodbManageServerServer struct {
 	svcCtx *svc.ServiceContext
-	MongodbManageServer.UnimplementedMongodbManageServerServer
+	mongodbmanageserver.UnimplementedMongodbManageServerServer
 }
 
 func NewMongodbManageServerServer(svcCtx *svc.ServiceContext) *MongodbManageServerServer {
@@ -22,7 +22,7 @@ func NewMongodbManageServerServer(svcCtx *svc.ServiceContext) *MongodbManageServ
 	}
 }
 
-func (s *MongodbManageServerServer) GetMinio(ctx context.Context, in *MongodbManageServer.IdRequest) (*MongodbManageServer.MinioResponse, error) {
+func (s *MongodbManageServerServer) GetMinio(ctx context.Context, in *mongodbmanageserver.IdRequest) (*mongodbmanageserver.MinioResponse, error) {
 	l := logic.NewGetMinioLogic(ctx, s.svcCtx)
 	return l.GetMinio(in)
 }

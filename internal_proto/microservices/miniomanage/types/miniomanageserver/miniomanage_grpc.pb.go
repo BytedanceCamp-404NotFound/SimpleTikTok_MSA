@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: proto/miniomanage.proto
 
-package MinioManageServer
+package miniomanageserver
 
 import (
 	context "context"
@@ -40,7 +40,7 @@ func NewMinioManageServerClient(cc grpc.ClientConnInterface) MinioManageServerCl
 
 func (c *minioManageServerClient) PutFileUploader(ctx context.Context, in *PutFileUploaderRequest, opts ...grpc.CallOption) (*PutFileUploaderResponse, error) {
 	out := new(PutFileUploaderResponse)
-	err := c.cc.Invoke(ctx, "/MinioManageServer.MinioManageServer/PutFileUploader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/miniomanageserver.MinioManageServer/PutFileUploader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (c *minioManageServerClient) PutFileUploader(ctx context.Context, in *PutFi
 
 func (c *minioManageServerClient) PutFileUploaderByte(ctx context.Context, in *PutFileUploaderByteRequest, opts ...grpc.CallOption) (*PutFileUploaderByteponse, error) {
 	out := new(PutFileUploaderByteponse)
-	err := c.cc.Invoke(ctx, "/MinioManageServer.MinioManageServer/PutFileUploaderByte", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/miniomanageserver.MinioManageServer/PutFileUploaderByte", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (c *minioManageServerClient) PutFileUploaderByte(ctx context.Context, in *P
 
 func (c *minioManageServerClient) GetFileUploader(ctx context.Context, in *GetMinioConnectRequest, opts ...grpc.CallOption) (*GetMinioConnectResponse, error) {
 	out := new(GetMinioConnectResponse)
-	err := c.cc.Invoke(ctx, "/MinioManageServer.MinioManageServer/GetFileUploader", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/miniomanageserver.MinioManageServer/GetFileUploader", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func _MinioManageServer_PutFileUploader_Handler(srv interface{}, ctx context.Con
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/MinioManageServer.MinioManageServer/PutFileUploader",
+		FullMethod: "/miniomanageserver.MinioManageServer/PutFileUploader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MinioManageServerServer).PutFileUploader(ctx, req.(*PutFileUploaderRequest))
@@ -132,7 +132,7 @@ func _MinioManageServer_PutFileUploaderByte_Handler(srv interface{}, ctx context
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/MinioManageServer.MinioManageServer/PutFileUploaderByte",
+		FullMethod: "/miniomanageserver.MinioManageServer/PutFileUploaderByte",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MinioManageServerServer).PutFileUploaderByte(ctx, req.(*PutFileUploaderByteRequest))
@@ -150,7 +150,7 @@ func _MinioManageServer_GetFileUploader_Handler(srv interface{}, ctx context.Con
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/MinioManageServer.MinioManageServer/GetFileUploader",
+		FullMethod: "/miniomanageserver.MinioManageServer/GetFileUploader",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MinioManageServerServer).GetFileUploader(ctx, req.(*GetMinioConnectRequest))
@@ -162,7 +162,7 @@ func _MinioManageServer_GetFileUploader_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MinioManageServer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "MinioManageServer.MinioManageServer",
+	ServiceName: "miniomanageserver.MinioManageServer",
 	HandlerType: (*MinioManageServerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

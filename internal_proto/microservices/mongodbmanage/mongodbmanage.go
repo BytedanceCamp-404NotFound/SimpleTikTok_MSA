@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/config"
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/server"
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/mongodbmanageserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -26,7 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		MongodbManageServer.RegisterMongodbManageServerServer(grpcServer, server.NewMongodbManageServerServer(ctx))
+		mongodbmanageserver.RegisterMongodbManageServerServer(grpcServer, server.NewMongodbManageServerServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

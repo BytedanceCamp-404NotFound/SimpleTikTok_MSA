@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/utilserver"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,8 @@ func NewGetMinioLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetMinio
 	}
 }
 
-func (l *GetMinioLogic) GetMinio(in *Utilserver.IdRequest) (*Utilserver.MinioResponse, error) {
+func (l *GetMinioLogic) GetMinio(in *utilserver.IdRequest) (*utilserver.MinioResponse, error) {
 	// todo: add your logic here and delete this line
 
-	return &Utilserver.MinioResponse{}, nil
+	return &utilserver.MinioResponse{}, nil
 }

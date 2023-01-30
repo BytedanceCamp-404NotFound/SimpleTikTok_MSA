@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/mysqlmanageserver"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +24,8 @@ func NewCommentGetUserByUserIdLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 // 1
-func (l *CommentGetUserByUserIdLogic) CommentGetUserByUserId(in *MySQLManageServer.CommentGetUserByUserIdRequest) (*MySQLManageServer.CommentGetUserByUserIdResponse, error) {
+func (l *CommentGetUserByUserIdLogic) CommentGetUserByUserId(in *mysqlmanageserver.CommentGetUserByUserIdRequest) (*mysqlmanageserver.CommentGetUserByUserIdResponse, error) {
 	// todo: add your logic here and delete this line
 
-	return &MySQLManageServer.CommentGetUserByUserIdResponse{}, nil
+	return &mysqlmanageserver.CommentGetUserByUserIdResponse{}, nil
 }

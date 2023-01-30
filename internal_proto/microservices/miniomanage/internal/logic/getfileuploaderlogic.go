@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/miniomanage/types/MinioManageServer"
+	"SimpleTikTok/internal_proto/microservices/miniomanage/types/miniomanageserver"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,8 +24,8 @@ func NewGetFileUploaderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *G
 }
 
 // 文件下载
-func (l *GetFileUploaderLogic) GetFileUploader(in *MinioManageServer.GetMinioConnectRequest) (*MinioManageServer.GetMinioConnectResponse, error) {
+func (l *GetFileUploaderLogic) GetFileUploader(in *miniomanageserver.GetMinioConnectRequest) (*miniomanageserver.GetMinioConnectResponse, error) {
 	// todo: add your logic here and delete this line
 
-	return &MinioManageServer.GetMinioConnectResponse{}, nil
+	return &miniomanageserver.GetMinioConnectResponse{}, nil
 }

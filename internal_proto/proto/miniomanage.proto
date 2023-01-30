@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package MinioManageServer;
+package miniomanageserver;
   
 // protoc-gen-go 版本大于1.4.0, proto文件需要加上go_package,否则无法生成
-option go_package = "./MinioManageServer";
+option go_package = "./miniomanageserver";
 
 message PutFileUploaderRequest {
     string bucketName = 1;

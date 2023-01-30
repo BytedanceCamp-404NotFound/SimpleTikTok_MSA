@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: proto/mysqlmanage.proto
 
-package MySQLManageServer
+package mysqlmanageserver
 
 import (
 	context "context"
@@ -38,7 +38,7 @@ func NewMySQLManageServerClient(cc grpc.ClientConnInterface) MySQLManageServerCl
 
 func (c *mySQLManageServerClient) CommentGetUserByUserId(ctx context.Context, in *CommentGetUserByUserIdRequest, opts ...grpc.CallOption) (*CommentGetUserByUserIdResponse, error) {
 	out := new(CommentGetUserByUserIdResponse)
-	err := c.cc.Invoke(ctx, "/MySQLManageServer.MySQLManageServer/CommentGetUserByUserId", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/mysqlmanageserver.MySQLManageServer/CommentGetUserByUserId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *mySQLManageServerClient) CommentGetUserByUserId(ctx context.Context, in
 
 func (c *mySQLManageServerClient) FavoriteVideoNum(ctx context.Context, in *FavoriteVideoNumRequest, opts ...grpc.CallOption) (*FavoriteVideoNumResponse, error) {
 	out := new(FavoriteVideoNumResponse)
-	err := c.cc.Invoke(ctx, "/MySQLManageServer.MySQLManageServer/FavoriteVideoNum", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/mysqlmanageserver.MySQLManageServer/FavoriteVideoNum", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func _MySQLManageServer_CommentGetUserByUserId_Handler(srv interface{}, ctx cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/MySQLManageServer.MySQLManageServer/CommentGetUserByUserId",
+		FullMethod: "/mysqlmanageserver.MySQLManageServer/CommentGetUserByUserId",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MySQLManageServerServer).CommentGetUserByUserId(ctx, req.(*CommentGetUserByUserIdRequest))
@@ -116,7 +116,7 @@ func _MySQLManageServer_FavoriteVideoNum_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/MySQLManageServer.MySQLManageServer/FavoriteVideoNum",
+		FullMethod: "/mysqlmanageserver.MySQLManageServer/FavoriteVideoNum",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MySQLManageServerServer).FavoriteVideoNum(ctx, req.(*FavoriteVideoNumRequest))
@@ -128,7 +128,7 @@ func _MySQLManageServer_FavoriteVideoNum_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MySQLManageServer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "MySQLManageServer.MySQLManageServer",
+	ServiceName: "mysqlmanageserver.MySQLManageServer",
 	HandlerType: (*MySQLManageServerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

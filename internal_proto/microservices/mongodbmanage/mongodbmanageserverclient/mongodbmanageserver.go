@@ -6,15 +6,15 @@ package mongodbmanageserverclient
 import (
 	"context"
 
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/mongodbmanageserver"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	IdRequest     = MongodbManageServer.IdRequest
-	MinioResponse = MongodbManageServer.MinioResponse
+	IdRequest     = mongodbmanageserver.IdRequest
+	MinioResponse = mongodbmanageserver.MinioResponse
 
 	MongodbManageServer interface {
 		GetMinio(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*MinioResponse, error)
@@ -32,6 +32,6 @@ func NewMongodbManageServer(cli zrpc.Client) MongodbManageServer {
 }
 
 func (m *defaultMongodbManageServer) GetMinio(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*MinioResponse, error) {
-	client := MongodbManageServer.NewMongodbManageServerClient(m.cli.Conn())
+	client := mongodbmanageserver.NewMongodbManageServerClient(m.cli.Conn())
 	return client.GetMinio(ctx, in, opts...)
 }

@@ -6,17 +6,17 @@ package mysqlmanageserverclient
 import (
 	"context"
 
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/mysqlmanageserver"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	CommentGetUserByUserIdRequest  = MySQLManageServer.CommentGetUserByUserIdRequest
-	CommentGetUserByUserIdResponse = MySQLManageServer.CommentGetUserByUserIdResponse
-	FavoriteVideoNumRequest        = MySQLManageServer.FavoriteVideoNumRequest
-	FavoriteVideoNumResponse       = MySQLManageServer.FavoriteVideoNumResponse
+	CommentGetUserByUserIdRequest  = mysqlmanageserver.CommentGetUserByUserIdRequest
+	CommentGetUserByUserIdResponse = mysqlmanageserver.CommentGetUserByUserIdResponse
+	FavoriteVideoNumRequest        = mysqlmanageserver.FavoriteVideoNumRequest
+	FavoriteVideoNumResponse       = mysqlmanageserver.FavoriteVideoNumResponse
 
 	MySQLManageServer interface {
 		// 1
@@ -38,12 +38,12 @@ func NewMySQLManageServer(cli zrpc.Client) MySQLManageServer {
 
 // 1
 func (m *defaultMySQLManageServer) CommentGetUserByUserId(ctx context.Context, in *CommentGetUserByUserIdRequest, opts ...grpc.CallOption) (*CommentGetUserByUserIdResponse, error) {
-	client := MySQLManageServer.NewMySQLManageServerClient(m.cli.Conn())
+	client := mysqlmanageserver.NewMySQLManageServerClient(m.cli.Conn())
 	return client.CommentGetUserByUserId(ctx, in, opts...)
 }
 
 // 2
 func (m *defaultMySQLManageServer) FavoriteVideoNum(ctx context.Context, in *FavoriteVideoNumRequest, opts ...grpc.CallOption) (*FavoriteVideoNumResponse, error) {
-	client := MySQLManageServer.NewMySQLManageServerClient(m.cli.Conn())
+	client := mysqlmanageserver.NewMySQLManageServerClient(m.cli.Conn())
 	return client.FavoriteVideoNum(ctx, in, opts...)
 }

@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: proto/mongodbmanage.proto
 
-package MongodbManageServer
+package mongodbmanageserver
 
 import (
 	context "context"
@@ -35,7 +35,7 @@ func NewMongodbManageServerClient(cc grpc.ClientConnInterface) MongodbManageServ
 
 func (c *mongodbManageServerClient) GetMinio(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*MinioResponse, error) {
 	out := new(MinioResponse)
-	err := c.cc.Invoke(ctx, "/MongodbManageServer.MongodbManageServer/getMinio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/mongodbmanageserver.MongodbManageServer/getMinio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _MongodbManageServer_GetMinio_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/MongodbManageServer.MongodbManageServer/getMinio",
+		FullMethod: "/mongodbmanageserver.MongodbManageServer/getMinio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MongodbManageServerServer).GetMinio(ctx, req.(*IdRequest))
@@ -92,7 +92,7 @@ func _MongodbManageServer_GetMinio_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MongodbManageServer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "MongodbManageServer.MongodbManageServer",
+	ServiceName: "mongodbmanageserver.MongodbManageServer",
 	HandlerType: (*MongodbManageServerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

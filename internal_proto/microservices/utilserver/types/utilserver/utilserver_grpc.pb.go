@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: proto/utilserver.proto
 
-package Utilserver
+package utilserver
 
 import (
 	context "context"
@@ -35,7 +35,7 @@ func NewUtilserverClient(cc grpc.ClientConnInterface) UtilserverClient {
 
 func (c *utilserverClient) GetMinio(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*MinioResponse, error) {
 	out := new(MinioResponse)
-	err := c.cc.Invoke(ctx, "/Utilserver.Utilserver/getMinio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/utilserver.Utilserver/getMinio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _Utilserver_GetMinio_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/Utilserver.Utilserver/getMinio",
+		FullMethod: "/utilserver.Utilserver/getMinio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UtilserverServer).GetMinio(ctx, req.(*IdRequest))
@@ -92,7 +92,7 @@ func _Utilserver_GetMinio_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Utilserver_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "Utilserver.Utilserver",
+	ServiceName: "utilserver.Utilserver",
 	HandlerType: (*UtilserverServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

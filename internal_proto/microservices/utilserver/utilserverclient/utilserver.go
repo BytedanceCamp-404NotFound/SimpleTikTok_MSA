@@ -6,15 +6,15 @@ package utilserverclient
 import (
 	"context"
 
-	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/utilserver"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	IdRequest     = Utilserver.IdRequest
-	MinioResponse = Utilserver.MinioResponse
+	IdRequest     = utilserver.IdRequest
+	MinioResponse = utilserver.MinioResponse
 
 	Utilserver interface {
 		GetMinio(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*MinioResponse, error)
@@ -32,6 +32,6 @@ func NewUtilserver(cli zrpc.Client) Utilserver {
 }
 
 func (m *defaultUtilserver) GetMinio(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*MinioResponse, error) {
-	client := Utilserver.NewUtilserverClient(m.cli.Conn())
+	client := utilserver.NewUtilserverClient(m.cli.Conn())
 	return client.GetMinio(ctx, in, opts...)
 }

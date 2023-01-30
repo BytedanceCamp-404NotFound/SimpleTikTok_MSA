@@ -9,12 +9,12 @@ import (
 
 type ServiceContext struct {
 	Config         config.Config
-	MinioManageRpc zrpc.RpcClientConf
+	MinioManageRpc miniomanageserverclient.MinioManageServer
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:         c,
-		MinioManageRpc: miniomanageserverclient.PutFileUploader(zrpc.MustNewClient(c.MinioManageRpc)),
+		MinioManageRpc: miniomanageserverclient.NewMinioManageServer(zrpc.MustNewClient(c.MinioManageRpc)),
 	}
 }

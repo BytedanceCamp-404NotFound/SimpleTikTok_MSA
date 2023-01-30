@@ -8,12 +8,12 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/utilserver"
 )
 
 type UtilserverServer struct {
 	svcCtx *svc.ServiceContext
-	Utilserver.UnimplementedUtilserverServer
+	utilserver.UnimplementedUtilserverServer
 }
 
 func NewUtilserverServer(svcCtx *svc.ServiceContext) *UtilserverServer {
@@ -22,7 +22,7 @@ func NewUtilserverServer(svcCtx *svc.ServiceContext) *UtilserverServer {
 	}
 }
 
-func (s *UtilserverServer) GetMinio(ctx context.Context, in *Utilserver.IdRequest) (*Utilserver.MinioResponse, error) {
+func (s *UtilserverServer) GetMinio(ctx context.Context, in *utilserver.IdRequest) (*utilserver.MinioResponse, error) {
 	l := logic.NewGetMinioLogic(ctx, s.svcCtx)
 	return l.GetMinio(in)
 }

@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/config"
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/server"
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/mysqlmanageserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -26,7 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		MySQLManageServer.RegisterMySQLManageServerServer(grpcServer, server.NewMySQLManageServerServer(ctx))
+		mysqlmanageserver.RegisterMySQLManageServerServer(grpcServer, server.NewMySQLManageServerServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

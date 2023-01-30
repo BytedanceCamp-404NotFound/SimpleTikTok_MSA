@@ -8,12 +8,12 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/mysqlmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/MySQLManageServer"
+	"SimpleTikTok/internal_proto/microservices/mysqlmanage/types/mysqlmanageserver"
 )
 
 type MySQLManageServerServer struct {
 	svcCtx *svc.ServiceContext
-	MySQLManageServer.UnimplementedMySQLManageServerServer
+	mysqlmanageserver.UnimplementedMySQLManageServerServer
 }
 
 func NewMySQLManageServerServer(svcCtx *svc.ServiceContext) *MySQLManageServerServer {
@@ -23,13 +23,13 @@ func NewMySQLManageServerServer(svcCtx *svc.ServiceContext) *MySQLManageServerSe
 }
 
 // 1
-func (s *MySQLManageServerServer) CommentGetUserByUserId(ctx context.Context, in *MySQLManageServer.CommentGetUserByUserIdRequest) (*MySQLManageServer.CommentGetUserByUserIdResponse, error) {
+func (s *MySQLManageServerServer) CommentGetUserByUserId(ctx context.Context, in *mysqlmanageserver.CommentGetUserByUserIdRequest) (*mysqlmanageserver.CommentGetUserByUserIdResponse, error) {
 	l := logic.NewCommentGetUserByUserIdLogic(ctx, s.svcCtx)
 	return l.CommentGetUserByUserId(in)
 }
 
 // 2
-func (s *MySQLManageServerServer) FavoriteVideoNum(ctx context.Context, in *MySQLManageServer.FavoriteVideoNumRequest) (*MySQLManageServer.FavoriteVideoNumResponse, error) {
+func (s *MySQLManageServerServer) FavoriteVideoNum(ctx context.Context, in *mysqlmanageserver.FavoriteVideoNumRequest) (*mysqlmanageserver.FavoriteVideoNumResponse, error) {
 	l := logic.NewFavoriteVideoNumLogic(ctx, s.svcCtx)
 	return l.FavoriteVideoNum(in)
 }

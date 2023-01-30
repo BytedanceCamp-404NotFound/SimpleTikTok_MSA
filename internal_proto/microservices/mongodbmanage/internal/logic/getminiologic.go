@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"SimpleTikTok/internal_proto/microservices/mongodbmanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/MongodbManageServer"
+	"SimpleTikTok/internal_proto/microservices/mongodbmanage/types/mongodbmanageserver"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +23,8 @@ func NewGetMinioLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetMinio
 	}
 }
 
-func (l *GetMinioLogic) GetMinio(in *MongodbManageServer.IdRequest) (*MongodbManageServer.MinioResponse, error) {
+func (l *GetMinioLogic) GetMinio(in *mongodbmanageserver.IdRequest) (*mongodbmanageserver.MinioResponse, error) {
 	// todo: add your logic here and delete this line
 
-	return &MongodbManageServer.MinioResponse{}, nil
+	return &mongodbmanageserver.MinioResponse{}, nil
 }

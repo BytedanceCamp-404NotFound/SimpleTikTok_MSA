@@ -8,12 +8,12 @@ import (
 
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/logic"
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/miniomanage/types/MinioManageServer"
+	"SimpleTikTok/internal_proto/microservices/miniomanage/types/miniomanageserver"
 )
 
 type MinioManageServerServer struct {
 	svcCtx *svc.ServiceContext
-	MinioManageServer.UnimplementedMinioManageServerServer
+	miniomanageserver.UnimplementedMinioManageServerServer
 }
 
 func NewMinioManageServerServer(svcCtx *svc.ServiceContext) *MinioManageServerServer {
@@ -23,19 +23,19 @@ func NewMinioManageServerServer(svcCtx *svc.ServiceContext) *MinioManageServerSe
 }
 
 // 文件上传
-func (s *MinioManageServerServer) PutFileUploader(ctx context.Context, in *MinioManageServer.PutFileUploaderRequest) (*MinioManageServer.PutFileUploaderResponse, error) {
+func (s *MinioManageServerServer) PutFileUploader(ctx context.Context, in *miniomanageserver.PutFileUploaderRequest) (*miniomanageserver.PutFileUploaderResponse, error) {
 	l := logic.NewPutFileUploaderLogic(ctx, s.svcCtx)
 	return l.PutFileUploader(in)
 }
 
 // byte形式文件上传
-func (s *MinioManageServerServer) PutFileUploaderByte(ctx context.Context, in *MinioManageServer.PutFileUploaderByteRequest) (*MinioManageServer.PutFileUploaderByteponse, error) {
+func (s *MinioManageServerServer) PutFileUploaderByte(ctx context.Context, in *miniomanageserver.PutFileUploaderByteRequest) (*miniomanageserver.PutFileUploaderByteponse, error) {
 	l := logic.NewPutFileUploaderByteLogic(ctx, s.svcCtx)
 	return l.PutFileUploaderByte(in)
 }
 
 // 文件下载
-func (s *MinioManageServerServer) GetFileUploader(ctx context.Context, in *MinioManageServer.GetMinioConnectRequest) (*MinioManageServer.GetMinioConnectResponse, error) {
+func (s *MinioManageServerServer) GetFileUploader(ctx context.Context, in *miniomanageserver.GetMinioConnectRequest) (*miniomanageserver.GetMinioConnectResponse, error) {
 	l := logic.NewGetFileUploaderLogic(ctx, s.svcCtx)
 	return l.GetFileUploader(in)
 }

@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/config"
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/server"
 	"SimpleTikTok/internal_proto/microservices/miniomanage/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/miniomanage/types/MinioManageServer"
+	"SimpleTikTok/internal_proto/microservices/miniomanage/types/miniomanageserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -26,7 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		MinioManageServer.RegisterMinioManageServerServer(grpcServer, server.NewMinioManageServerServer(ctx))
+		miniomanageserver.RegisterMinioManageServerServer(grpcServer, server.NewMinioManageServerServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

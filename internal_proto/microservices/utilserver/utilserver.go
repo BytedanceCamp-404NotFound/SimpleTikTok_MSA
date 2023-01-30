@@ -7,7 +7,7 @@ import (
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/config"
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/server"
 	"SimpleTikTok/internal_proto/microservices/utilserver/internal/svc"
-	"SimpleTikTok/internal_proto/microservices/utilserver/types/Utilserver"
+	"SimpleTikTok/internal_proto/microservices/utilserver/types/utilserver"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -26,7 +26,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		Utilserver.RegisterUtilserverServer(grpcServer, server.NewUtilserverServer(ctx))
+		utilserver.RegisterUtilserverServer(grpcServer, server.NewUtilserverServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

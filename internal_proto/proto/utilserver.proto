@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package Utilserver;
+package utilserver;
   
 // protoc-gen-go 版本大于1.4.0, proto文件需要加上go_package,否则无法生成
-option go_package = "./Utilserver";
+option go_package = "./utilserver";
 
 message IdRequest {
     string id = 1;
