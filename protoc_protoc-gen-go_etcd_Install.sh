@@ -1,23 +1,14 @@
-echo ==================================在当前目录下创建文件夹,并解压安装包============================================
+#! /bin/bash
+apt-get install unzip
 unzip -d ./protoc-21.12-linux-x86_64 protoc-21.12-linux-x86_64.zip
 cd protoc-21.12-linux-x86_64/bin
-
-echo ==================================将启动的protoc二进制文件移动到被添加到环境变量下================================
 mv protoc $GOPATH/bin
-
-echo ====================================protoc安装测试=============================================================
 protoc --version
-
-echo ==================================protoc-gen-go安装===========================================================
-go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-
-echo =====================================在当前目录下创建文件夹,并解压安装包========================================
+cd -
+# go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+# go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 tar -zxvf etcd-v3.5.7-linux-amd64.tar.gz
 cd etcd-v3.5.7-linux-amd64
-
-echo ==================================将启动的etcd二进制文件移动到被添加到环境变量下=================================
 cp etcd etcdctl /usr/local/bin
-
-echo ====================================etcd安装测试==============================================================
 etcd --version
+cd -
