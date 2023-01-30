@@ -14,7 +14,7 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 echo =====================================在当前目录下创建文件夹,并解压安装包========================================
 tar -zxvf etcd-v3.5.7-linux-amd64.tar.gz
-cd etcd-v3.5.7-linux-amd64.tar
+cd etcd-v3.5.7-linux-amd64
 
 echo ==================================将启动的etcd二进制文件移动到被添加到环境变量下=================================
 cp etcd etcdctl /usr/local/bin
