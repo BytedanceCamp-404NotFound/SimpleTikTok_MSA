@@ -2,16 +2,22 @@
 
 OutType=$1
 ROOT=$PWD
+BIN_FOLDER=$ROOT/bin
 API_OUTPUT=$ROOT/bin/external
 PROTO_OUTPUT=$ROOT/bin/internal
 ETC_OUTPUT=$ROOT/bin/etc
 etc_output_api=$ETC_OUTPUT/external
 etc_output_proto=$ETC_OUTPUT/internal
+LOG_FOLDER=$ROOT/bin/logs/
 
-if [ ! -d $ETC_OUTPUT ]; then
-    mkdir -p $ETC_OUTPUT
+
+if [ ! -d $BIN_FOLDER ]; then
+    mkdir -p $API_OUTPUT
+    mkdir -p $PROTO_OUTPUT
+    mkdir -p $etc_output_api
+    mkdir -p $etc_output_proto
+    mkdir -p $LOG_FOLDER
 fi
-
 
 create_api(){
     cd external
@@ -114,12 +120,32 @@ fi
 run_api(){
     build_api
     cd $API_OUTPUT
-    for f in $(find .  -type f -exec basename {} \;)
-    do
-        cmd="./$f -f $etc_output_api/$f.yaml  &"
-        echo $cmd
-        eval $cmd
-    done
+    if [[ $1 == "-c" ]];then
+        case $2 in
+        "base")
+            filename="$(date +%Y%m%d)_$(date +%H%M%S)_baseinterface.log"
+            ./baseinterface -f $etc_output_api/baseinterface.yaml > $LOG_FOLDER$filename 2>&1 
+        ;;
+        "com")
+            ./commactioninterface -f $etc_output_api/commactioninterface.yaml
+        ;;
+        "rela")
+            ./relationfollowinterface -f $etc_output_api/relationfollowinterface.yaml
+        ;;
+        *)
+            echo "useage: ./GoZeroUse run api -c"
+            echo "        ./GoZeroUse run api -c [base,com,rela]"
+            echo "        ./GoZeroUse run api # 全部运行"
+        esac
+    else
+        for f in $(find .  -type f -exec basename {} \;)
+        do
+            filename="$(date +%Y%m%d)_$(date +%H%M%S)_$f.log"
+            cmd="./$f -f $etc_output_api/$f.yaml > $LOG_FOLDER$filename 2>&1 &"
+            echo $cmd
+            eval $cmd
+        done
+    fi
     # ./baseinterface -f $etc_output_api/baseinterface.yaml  &
     # ./commactioninterface -f $etc_output_api/commactioninterface.yaml  &
     # ./relationfollowinterface -f $etc_output_api/relationfollowinterface.yaml  &
@@ -137,17 +163,24 @@ run_proto(){
     cd -
 }
 if [[ $OutType == "run" ]];then 
+    cp -r config bin  # 复制配置文件
     case $2 in
     "api" )
-        run_api
+        run_api $3 $4
     ;;
     "proto" )
         etcd &
         run_proto
     ;;
-    *)
+    "all")
         run_api
         run_proto
+    ;;
+    *)
+        echo "useage: ./GoZeroUse run  "
+        echo "        ./GoZeroUse run all"
+        echo "        ./GoZeroUse run api "
+        echo "        ./GoZeroUse run api -c base"
     ;;
     esac
 

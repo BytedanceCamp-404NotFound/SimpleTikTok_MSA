@@ -31,7 +31,11 @@ jobs:
         with:
           go-version: 1.19
     
-      - name: Build   # 构建go
+      - name: Build api  # 构建go
         run: |
-          ./GoZeroUse.sh build
+          ./GoZeroUse.sh build api
+
+      - name: Build proto # 构建go
+        run: |
+          ./GoZeroUse.sh build proto
 # go run greet.go -f etc/greet-api.yaml

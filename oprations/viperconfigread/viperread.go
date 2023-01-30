@@ -45,9 +45,10 @@ func getExeFile() (string, error) {
 		logx.Errorf("%v %v", exePath, err)
 		return "", err
 	}
-	//返回上级目录
-	yamlFile := filepath.Dir(filepath.Dir(exePath))
-	configFile := fmt.Sprintf("%s/oprations/databaseconfig.yaml", yamlFile)
+	// 返回上级目录
+	yamlFile := filepath.Dir(filepath.Dir(filepath.Dir(exePath)))
+	// 这个路径是手动指定的，经常需要修改
+	configFile := fmt.Sprintf("%s/bin/config/databaseconfig.yaml", yamlFile)
 	logx.Infof("yamlFile:%v outputDir:%v", yamlFile, configFile)
 	return configFile, nil
 }
