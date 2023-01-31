@@ -13,15 +13,23 @@ import (
 // 向user_login表中插入新值，同时更新user表
 // 返回id不为-1表示注册成功
 // 返回id为-1表示失败
-func CreateUser(db *gorm.DB, UserName string, password string) int {
+func CreateUser(db *gorm.DB, UserName string, password string) (int, error) {
 	id := -1
 	// db, _ := SqlConnect()
 	user := User_login{UserName: UserName, UserPwd: encryption.HashEncode(password), RegisterDate: time.Now()}
-	db.Table("user_login").Create(&user)
+	err := db.Table("user_login").Create(&user).Error
+	if err != nil {
+		logx.Errorf("Create user_login error: %v", err)
+		return id, err
+	}
 	db.Table("user_login").Select("user_id").Where("user_name = ? and user_pwd = ?", UserName, encryption.HashEncode(password)).Find(&id)
 
-	CreateInfo(UserName, int64(id))
-	return id
+	err = CreateInfo(UserName, int64(id))
+	if err != nil {
+		logx.Errorf("Create user_info error: %v", err)
+		return -1, err
+	}
+	return id, nil
 }
 
 // 函数功能 校验user_name表中的账户密码是否一致
