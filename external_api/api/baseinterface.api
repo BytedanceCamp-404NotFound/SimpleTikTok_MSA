@@ -28,17 +28,17 @@ type UserHandlerResponse {
 }
 
 // 用户注册接口
-type UserRegisterHandlerRequest {
-	UserName string `form:"username"`
-	PassWord string `form:"password"`
-}
+// type UserRegisterHandlerRequest {
+// 	UserName string `form:"username"`
+// 	PassWord string `form:"password"`
+// }
 
-type UserRegisterHandlerResponse {
-	StatusCode int32  `json:"status_code"`
-	StatusMsg  string `json:"status_msg"`
-	Token      string `json:"token"`
-	UserID     int64  `json:"user_id"`
-}
+// type UserRegisterHandlerResponse {
+// 	StatusCode int32  `json:"status_code"`
+// 	StatusMsg  string `json:"status_msg"`
+// 	Token      string `json:"token"`
+// 	UserID     int64  `json:"user_id"`
+// }
 
 // 用户登陆接口
 type UserloginHandlerRequest {
@@ -78,6 +78,7 @@ type PublishListHandlerResponse {
 }
 
 @server(
+	jwt:   Auth
 	group: BaseInterface
 )
 
@@ -86,9 +87,9 @@ service BaseInterface {
 	// 视频流接口
 	@handler FeedHandler
 	get /douyin/feed(FeedHandlerRequest) returns (FeedHandlerResponse)
-	// 用户登陆接口
-	@handler UserRegisterHandler
-	post /douyin/user/register(UserRegisterHandlerRequest) returns (UserRegisterHandlerResponse)
+	// 用户注册接口 使用单独api
+	// @handler UserRegisterHandler
+	// post /douyin/user/register(UserRegisterHandlerRequest) returns (UserRegisterHandlerResponse)
 	// 用户登录接口
 	@handler UserloginHandler
 	post /douyin/user/login(UserloginHandlerRequest) returns (UserloginHandlerResponse)

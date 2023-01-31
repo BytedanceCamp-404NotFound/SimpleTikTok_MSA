@@ -1,0 +1,7 @@
+Name: RegisterInterface
+Host: 0.0.0.0
+Port: 8887
+SecretKey: C8xHnG6s
+Auth:
+  AccessSecret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+  AccessExpire: 64800

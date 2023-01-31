@@ -35,6 +35,7 @@ create_api(){
     goctl api go -api api/baseinterface.api -dir baseinterface/ -style gozero
     goctl api go -api api/commaction.api -dir commaction/ -style gozero
     goctl api go -api api/relationfollow.api -dir relationfollow/ -style gozero
+    goctl api go -api api/registerinterface.api -dir registerinterface/ -style gozero
     cd -
 }
 create_proto(){
@@ -45,7 +46,6 @@ create_proto(){
         ft=$(basename $f .proto)
         proto_file="proto/$f"
         goctl_cmd2=" --go_out=microservices/$ft/types --go-grpc_out=microservices/$ft/types --zrpc_out=microservices/$ft"
-        # goctl_cmd2=" --go_out=$ft/types --go-grpc_out=$ft/types --zrpc_out=$ft"
         # goctl_cmd2=" --go_out=./types --go-grpc_out=./types --zrpc_out=."
         cmd=$goctl_cmd1$proto_file$goctl_cmd2
         echo $cmd
@@ -90,9 +90,11 @@ build_api(){
     go build -o $API_OUTPUT -v -p 2 $is_build baseinterface/baseinterface.go  
     go build -o $API_OUTPUT -v -p 2 $is_build commaction/commactioninterface.go  
     go build -o $API_OUTPUT -v -p 2 $is_build relationfollow/relationfollowinterface.go  
+    go build -o $API_OUTPUT -v -p 2 $is_build registerinterface/registerinterface.go 
     cp baseinterface/etc/* $etc_output_api
     cp commaction/etc/* $etc_output_api
     cp relationfollow/etc/* $etc_output_api
+    cp registerinterface/etc/* $etc_output_api
     cd -
 }
 build_proto(){

@@ -1,11 +1,11 @@
-package BaseInterface
+package RegisterInterface
 
 import (
 	"net/http"
 
-	"SimpleTikTok/external_api/baseinterface/internal/logic/BaseInterface"
-	"SimpleTikTok/external_api/baseinterface/internal/svc"
-	"SimpleTikTok/external_api/baseinterface/internal/types"
+	"SimpleTikTok/external_api/registerinterface/internal/logic/RegisterInterface"
+	"SimpleTikTok/external_api/registerinterface/internal/svc"
+	"SimpleTikTok/external_api/registerinterface/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
@@ -17,7 +17,7 @@ func UserRegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := BaseInterface.NewUserRegisterLogic(r.Context(), svcCtx)
+		l := RegisterInterface.NewUserRegisterLogic(r.Context(), svcCtx)
 		resp, err := l.UserRegister(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

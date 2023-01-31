@@ -1,6 +1,10 @@
 Name: BaseInterface
 Host: 0.0.0.0
 Port: 8888
+SecretKey: C8xHnG6s
+Auth:
+  AccessSecret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+  AccessExpire: 64800
 MinioManageRpc:
   Etcd:
     Hosts:

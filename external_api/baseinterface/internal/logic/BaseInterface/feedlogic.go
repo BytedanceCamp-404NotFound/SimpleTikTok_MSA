@@ -2,13 +2,15 @@ package BaseInterface
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 	"time"
 
 	"SimpleTikTok/external_api/baseinterface/internal/svc"
 	"SimpleTikTok/external_api/baseinterface/internal/types"
 	"SimpleTikTok/oprations/commonerror"
 	"SimpleTikTok/oprations/mysqlconnect"
-	tools "SimpleTikTok/tools/token"
+	// tools "SimpleTikTok/tools/token"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -28,24 +30,29 @@ func NewFeedLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FeedLogic {
 }
 
 func (l *FeedLogic) Feed(req *types.FeedHandlerRequest) (resp *types.FeedHandlerResponse, err error) {
-	ok, userId, err := tools.CheckToke(req.Token)
-	if err != nil {
-		return &types.FeedHandlerResponse{
-			StatusCode: int32(commonerror.CommonErr_INTERNAL_ERROR),
-			StatusMsg:  "Token校验出错",
-			VideoList:  []types.Video{},
-			NextTime:   time.Now().Unix(), // 暂时返回当前时间
-		}, nil
-	}
-	if !ok {
-		logx.Infof("[pkg]logic [func]Feed [msg]feedUserInfo.Name is nuil ")
-		return &types.FeedHandlerResponse{
-			StatusCode: int32(commonerror.CommonErr_PARAMETER_FAILED),
-			StatusMsg:  "登录过期，请重新登陆",
-			VideoList:  []types.Video{},
-			NextTime:   time.Now().Unix(), // 暂时返回当前时间
-		}, nil
-	}
+	userIdTTT := fmt.Sprintf("%v", l.ctx.Value("userIdentity"))	
+	// 这里的key和生成jwt token时传入的key一致
+	userId, err := strconv.Atoi(userIdTTT)
+	logx.Infof("userId: %v",userId)
+
+	// ok, userId, err := tools.CheckToke(req.Token)
+	// if err != nil {
+	// 	return &types.FeedHandlerResponse{
+	// 		StatusCode: int32(commonerror.CommonErr_INTERNAL_ERROR),
+	// 		StatusMsg:  "Token校验出错",
+	// 		VideoList:  []types.Video{},
+	// 		NextTime:   time.Now().Unix(), // 暂时返回当前时间
+	// 	}, nil
+	// }
+	// if !ok {
+	// 	logx.Infof("[pkg]logic [func]Feed [msg]feedUserInfo.Name is nuil ")
+	// 	return &types.FeedHandlerResponse{
+	// 		StatusCode: int32(commonerror.CommonErr_PARAMETER_FAILED),
+	// 		StatusMsg:  "登录过期，请重新登陆",
+	// 		VideoList:  []types.Video{},
+	// 		NextTime:   time.Now().Unix(), // 暂时返回当前时间
+	// 	}, nil
+	// }
 
 	feedUserInfo, err := mysqlconnect.GetFeedUserInfo(userId)
 	if err != nil {

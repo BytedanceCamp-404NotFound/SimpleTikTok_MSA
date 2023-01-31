@@ -1,13 +1,14 @@
-package BaseInterface
+package RegisterInterface
 
 import (
 	"context"
+	"time"
 
-	"SimpleTikTok/external_api/baseinterface/internal/svc"
-	"SimpleTikTok/external_api/baseinterface/internal/types"
+	"SimpleTikTok/external_api/registerinterface/internal/svc"
+	"SimpleTikTok/external_api/registerinterface/internal/types"
 	"SimpleTikTok/oprations/mysqlconnect"
-	tools "SimpleTikTok/tools/token"
 
+	"github.com/golang-jwt/jwt"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -25,9 +26,6 @@ func NewUserRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *User
 	}
 }
 
-// TODO优化:
-// 1. 大量用户注册测试
-// 响应时间：2471.2ms
 func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterHandlerRequest) (resp *types.UserRegisterHandlerResponse, err error) {
 	logx.Infof("UserRegister UserName: %v PassWord: %v", req.UserName, req.PassWord == "")
 	if req.PassWord == "" && req.UserName == "" {
@@ -80,11 +78,33 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterHandlerRequest) 
 			Token:      "",
 		}, err
 	}
-	TokenString, err := tools.CreateToken(uid)
+
+	payloads := make(map[string]any)
+	payloads["userIdentity"] = uid
+	TokenString, tokenErr := l.GetToken(time.Now().Unix(), l.svcCtx.Config.Auth.AccessSecret, payloads, l.svcCtx.Config.Auth.AccessExpire)
+	if tokenErr != nil {
+		return nil, tokenErr
+	}
+
+	// TokenString, err := GetToken(uid)
 	return &types.UserRegisterHandlerResponse{
 		StatusCode: 0,
 		StatusMsg:  "注册成功",
 		UserID:     int64(uid),
 		Token:      TokenString,
 	}, err
+}
+
+func (l *UserRegisterLogic) GetToken(iat int64, secretKey string, payloads map[string]any, seconds int64) (string, error) {
+	claims := make(jwt.MapClaims)
+	claims["expTime"] = iat + seconds
+	claims["iat"] = iat
+	for k, v := range payloads {
+		claims[k] = v
+	}
+
+	token := jwt.New(jwt.SigningMethodHS256)
+	token.Claims = claims
+
+	return token.SignedString([]byte(secretKey))
 }

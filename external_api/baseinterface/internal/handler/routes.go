@@ -20,11 +20,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/douyin/user/register",
-				Handler: BaseInterface.UserRegisterHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
 				Path:    "/douyin/user/login",
 				Handler: BaseInterface.UserloginHandler(serverCtx),
 			},
@@ -44,5 +39,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: BaseInterface.PublishListHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }
