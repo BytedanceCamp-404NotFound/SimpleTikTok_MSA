@@ -7,11 +7,11 @@ import (
 
 type Config struct {
 	rest.RestConf
-	SecretKey string
-	Auth struct {
-		AccessSecret string
-		AccessExpire int64
-	}
+	// SecretKey string
+	// Auth struct {
+	// 	AccessSecret string
+	// 	AccessExpire int64
+	// }
 	MinioManageRpc zrpc.RpcClientConf
 	MySQLManageRpc zrpc.RpcClientConf
 	UtilServerRpc  zrpc.RpcClientConf

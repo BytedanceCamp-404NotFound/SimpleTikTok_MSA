@@ -24,6 +24,18 @@ type UserHandlerResponse struct {
 	User       User   `json:"user"`
 }
 
+type UserRegisterHandlerRequest struct {
+	UserName string `form:"username"`
+	PassWord string `form:"password"`
+}
+
+type UserRegisterHandlerResponse struct {
+	StatusCode int32  `json:"status_code"`
+	StatusMsg  string `json:"status_msg"`
+	Token      string `json:"token"`
+	UserID     int64  `json:"user_id"`
+}
+
 type UserloginHandlerRequest struct {
 	UserName string `form:"username"`
 	PassWord string `form:"password"`
