@@ -11,3 +11,8 @@ MySQLManageRpc:
     Hosts:
     - 127.0.0.1:2379
     Key: mysqlmanage.rpc
+UtilServerRpc:
+  Etcd:
+    Hosts:
+    - 127.0.0.1:2379
+    Key: utilserver.rpc

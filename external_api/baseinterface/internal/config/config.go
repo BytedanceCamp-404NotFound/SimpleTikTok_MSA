@@ -9,4 +9,5 @@ type Config struct {
 	rest.RestConf
 	MinioManageRpc zrpc.RpcClientConf
 	MySQLManageRpc zrpc.RpcClientConf
+	UtilServerRpc  zrpc.RpcClientConf
 }
