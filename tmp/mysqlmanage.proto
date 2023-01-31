@@ -31,11 +31,21 @@ message FavoriteVideoNumResponse {
     // CommentUser gender = 1;
     string error = 2;
 }
-  
+
+message UserLoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message UserLoginResponse {
+    int32 uid = 1;
+}
   
 service MySQLManageServer {
     // 1
     rpc CommentGetUserByUserId(CommentGetUserByUserIdRequest) returns(CommentGetUserByUserIdResponse);
     // 2
     rpc FavoriteVideoNum(FavoriteVideoNumRequest) returns(FavoriteVideoNumResponse);
+    // 用户登录
+    rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
 }
