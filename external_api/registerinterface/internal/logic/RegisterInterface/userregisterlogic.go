@@ -68,7 +68,7 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterHandlerRequest) 
 		}, err
 	}
 
-	uid := mysqlconnect.CreateUser(db, req.UserName, req.PassWord)
+	uid，err := mysqlconnect.CreateUser(db, req.UserName, req.PassWord)
 	logx.Infof("%d", uid)
 	if uid == -1 {
 		return &types.UserRegisterHandlerResponse{
