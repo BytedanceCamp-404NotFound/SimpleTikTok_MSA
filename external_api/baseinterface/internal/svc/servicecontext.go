@@ -20,7 +20,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:         c,
 		MinioManageRpc: miniomanageserverclient.NewMinioManageServer(zrpc.MustNewClient(c.MinioManageRpc)),
-		MySQLManageRpc: mysqlmanageserverclient.NewMySQLManageServer(zrpc.MustNewClient(c.MySQLManageRpc)),
+		MySQLManageRpc: mysqlmanageserverclient.NewMySQLManageServer(zrpc.MustNewClient(c.MinioManageRpc)),
 		UtilServerRpc:  utilserverclient.NewUtilserver(zrpc.MustNewClient(c.UtilServerRpc)),
 	}
 }

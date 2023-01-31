@@ -32,10 +32,31 @@ message FavoriteVideoNumResponse {
     string error = 2;
 }
   
+message UserLoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message UserLoginResponse {
+    int32 userId = 1;
+}
+
+message UserRegisterRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message UserRegisterResponse {
+    int32 userId = 1;
+}
   
 service MySQLManageServer {
     // 1
     rpc CommentGetUserByUserId(CommentGetUserByUserIdRequest) returns(CommentGetUserByUserIdResponse);
     // 2
     rpc FavoriteVideoNum(FavoriteVideoNumRequest) returns(FavoriteVideoNumResponse);
+    // 用户登陆校验
+    rpc UserLogin(UserLoginRequest) returns(UserLoginResponse);
+    // 用户注册
+    rpc UserRigster(UserRegisterRequest) returns(UserRegisterResponse);
 }
